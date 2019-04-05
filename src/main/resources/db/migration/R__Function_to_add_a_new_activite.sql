@@ -1,5 +1,3 @@
-CREATE OR REPLACE FUNCTION add_activity_with_title(title character varying(200)) RETURNS bigint AS $$
-   INSERT INTO activity VALUES ((SELECT nextval('id_generator')), add_activity_with_title.title)
-   -- id accessible car tous les champs de la ligne créé précédament sont accessibles
-   RETURNING id;  
+CREATE OR REPLACE FUNCTION add_activity_with_title(title varchar(200)) RETURNS bigint AS $$
+  INSERT INTO activity (id,title) VALUES (nextval('id_generator'), add_activity_with_title.title) RETURNING id;
 $$ LANGUAGE SQL;
